@@ -18,12 +18,23 @@ namespace :db do
   end
 
   desc "Run migrations."
-  tast migrate: :environment do
-    #
+  task migrate: :environment do
+    Sequel.extension :migration
+    Sequel::Migrator.apply(DB, File.join(::Rails.root, 'db', 'migrate'))
+  end
+
+  desc "Reset the database."
+  task reset: :environment do
+    DB.tables.each do |table|
+      DB.run("DROP TABLE #{table}")
+    end
+    Rake::Task['db:migrate'].invoke(::Rails.env)
   end
 
   desc "Erase and populate the database with random data."
   task populate: :environment do
-    #
+    Rake::Task['db:reset'].invoke(::Rails.env)
+
+    
   end
 end
