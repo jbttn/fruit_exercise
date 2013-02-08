@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-FruitExcercise::Application.load_tasks
+FruitExercise::Application.load_tasks
