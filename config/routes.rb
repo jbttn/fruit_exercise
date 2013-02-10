@@ -1,4 +1,8 @@
 FruitExercise::Application.routes.draw do
+
+  get 'top_urls' => 'reports#top_urls'
+  get 'top_referrers' => 'reports#top_referrers'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
